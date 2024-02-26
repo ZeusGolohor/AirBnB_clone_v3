@@ -102,18 +102,12 @@ class DBStorage:
         classes = {"Amenity": Amenity, "City": City, "Place": Place,
                    "Review": Review, "State": State, "User": User}
         if (cls is not None):
-            try:
-                res = len(storage.all(cls).values())
-                return(res)
-            except Exception:
-                pass
+            res = len(storage.all(cls).values())
+            return(res)
         else:
             total = 0
             for key, cls in classes.items():
-                try:
-                    res = len(storage.all(cls).values())
-                    total = total + res
-                except Exception:
-                    pass
+                res = len(storage.all(cls).values())
+                total = total + res
 
             return total
