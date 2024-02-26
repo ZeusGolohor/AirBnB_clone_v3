@@ -3,7 +3,7 @@
 A script for initializing flasks and
 registering blueprints.
 """
-from flask import Flask
+from flask import Flask, jsonify
 from api.v1.views import app_views
 from models import storage
 import os
@@ -18,6 +18,16 @@ def teardown_appcontext(exception=None):
     if storage:
         storage.close()
         print("Storage closed.")
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    """
+    A method to handle instances when resources are
+    found.
+    """
+    print(error)
+    return jsonify({"error": "Not found"})
 
 
 if __name__ == "__main__":
