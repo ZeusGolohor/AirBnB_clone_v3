@@ -3,14 +3,15 @@
 A script for initializing flasks and
 registering blueprints.
 """
-from flask import Flask, jsonify
-from api.v1.views import app_views
+from flask import Flask, jsonify, request
+from api.v1.views import app_views, state_views
 from models import storage
 import os
 
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
+app.register_blueprint(state_views)
 
 
 @app.teardown_appcontext
@@ -28,7 +29,10 @@ def page_not_found(error):
     found.
     """
     # print(error)
-    return jsonify({"error": "Not found"})
+    if request.path.startswith('/api/'):
+        return jsonify({"error": "Not found"}), 404
+    else:
+        return (error)
 
 
 if __name__ == "__main__":
