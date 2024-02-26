@@ -17,7 +17,7 @@ def teardown_appcontext(exception=None):
     # This function will be called when the application context ends
     if storage:
         storage.close()
-        print("Storage closed.")
+        # print("Storage closed.")
 
 
 @app.errorhandler(404)
@@ -26,7 +26,7 @@ def page_not_found(error):
     A method to handle instances when resources are
     found.
     """
-    print(error)
+    # print(error)
     return jsonify({"error": "Not found"})
 
 
