@@ -86,7 +86,7 @@ class DBStorage:
             for key, ins in res.items():
                 if (ins.id == id):
                     return (ins)
-                
+
     def count(self, cls=None):
         """
         A method to count the number of objects in storage.
@@ -103,11 +103,11 @@ class DBStorage:
                    "Review": Review, "State": State, "User": User}
         if (cls is not None):
             res = len(storage.all(cls).values())
-            return(res)
+            return (res)
         else:
             total = 0
             for key, cls in classes.items():
                 res = len(storage.all(cls).values())
                 total = total + res
 
-            return total
+            return (total)
