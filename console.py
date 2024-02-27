@@ -11,7 +11,9 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+from models import storage
 import shlex  # for splitting the line along spaces except in double quotes
+
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -20,6 +22,10 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 class HBNBCommand(cmd.Cmd):
     """ HBNH console """
     prompt = '(hbnb) '
+
+    # to make sure the storage engine is
+    # always available during every startUp.
+    storage.reload()
 
     def do_EOF(self, arg):
         """Exits console"""
