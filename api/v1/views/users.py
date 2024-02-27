@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-A script to handle the Amenity model
+A script to handle the User model
 """
 from flask import jsonify, abort, request
 from api.v1.views import user_views
