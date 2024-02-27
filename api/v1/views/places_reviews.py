@@ -61,7 +61,9 @@ def all_cites(review_id=None, place_id=None):
         try:
             data = request.get_json()
             try:
-                data["name"]
+                data["place_id"]
+                data["user_id"]
+                data["text"]
                 # check if the state exists
                 state = None
                 all_state = storage.all(cls1)

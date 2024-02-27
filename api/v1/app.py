@@ -7,9 +7,11 @@ from flask import Flask, jsonify, request
 from api.v1.views import app_views, state_views, city_views, amenity_views, user_views, place_views, review_views
 from models import storage
 import os
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "http://0.0.0.0"}})
 app.register_blueprint(app_views)
 app.register_blueprint(state_views)
 app.register_blueprint(city_views)
