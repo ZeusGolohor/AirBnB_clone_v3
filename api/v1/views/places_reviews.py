@@ -23,15 +23,15 @@ def all_cites(review_id=None, place_id=None):
     if (request.method == "GET"):
         # check if state_id is present
         if (place_id is not None):
-            cities = []
+            reviews = []
             res = storage.all(cls1)
             for key, value in res.items():
                 if (value.id == place_id):
                     res2 = storage.all(cls)
-                    for key, value in res2.items():
-                        if (value.place_id == place_id):
-                            cities.append(value.to_dict())
-                    return (jsonify(cities))
+                    for key2, value2 in res2.items():
+                        if (value2.place_id == place_id):
+                            reviews.append(value2.to_dict())
+                    return (jsonify(reviews))
         # check if the request is for a single
         # or multiple instance(s)
         elif (review_id is not None):
