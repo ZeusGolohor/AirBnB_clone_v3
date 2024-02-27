@@ -4,7 +4,7 @@ A script for initializing flasks and
 registering blueprints.
 """
 from flask import Flask, jsonify, request
-from api.v1.views import app_views, state_views, city_views, amenity_views
+from api.v1.views import app_views, state_views, city_views, amenity_views, user_views
 from models import storage
 import os
 
@@ -14,6 +14,7 @@ app.register_blueprint(app_views)
 app.register_blueprint(state_views)
 app.register_blueprint(city_views)
 app.register_blueprint(amenity_views)
+app.register_blueprint(user_views)
 
 
 @app.teardown_appcontext

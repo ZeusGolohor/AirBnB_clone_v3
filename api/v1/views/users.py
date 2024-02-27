@@ -3,19 +3,19 @@
 A script to handle the Amenity model
 """
 from flask import jsonify, abort, request
-from api.v1.views import amenity_views
+from api.v1.views import user_views
 from models import storage
-from models.amenity import Amenity
+from models.user import User
 
-@amenity_views.route("/amenities/<amenity_id>", methods=["GET", "DELETE", "PUT"], strict_slashes=False)
-@amenity_views.route("/amenities", methods=["GET", "POST"], strict_slashes=False)
-def all_states(amenity_id=None):
+@user_views.route("/users/<user_id>", methods=["GET", "DELETE", "PUT"], strict_slashes=False)
+@user_views.route("/users", methods=["GET", "POST"], strict_slashes=False)
+def all_states(user_id=None):
     """
     A method to retrieve all states.
     """
     # setting the model for this method
-    cls = Amenity
-    id = amenity_id
+    cls = User
+    id = user_id
     # check if the request is a GET request.
     if (request.method == "GET"):
         # check if the request is for a single
