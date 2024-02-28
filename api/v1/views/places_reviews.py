@@ -65,14 +65,14 @@ def all_cites(review_id=None, place_id=None):
                 data["user_id"]
                 data["text"]
                 # check if the state exists
-                state = None
-                all_state = storage.all(cls1)
-                for key, value in all_state.items():
+                place = None
+                all_places = storage.all(cls1)
+                for key, value in all_places.items():
                     if (value.id == place_id):
-                        state = value
-                if (state == None):
+                        place = value
+                if (place == None):
                     return (abort(404))
-                data["state_id"] = state.id
+                data["place_id"] = place.id
                 ins = cls(**data)
                 ins.save()
                 return (ins.to_dict(), 201)
