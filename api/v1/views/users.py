@@ -76,7 +76,14 @@ def all_states(user_id=None):
             return (jsonify({"message": "Not a JSON"}), 400)
     elif (request.method == "PUT"):
         if (id is not None):
-            awd_keys = ["name"]
+            awd_keys = [
+                        "email",
+                        "password",
+                        "first_name",
+                        "last_name",
+                        "places",
+                        "reviews"
+                    ]
             res = storage.all(cls)
             for key, value in res.items():
                 if (value.id == id):
