@@ -17,7 +17,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 #  Adding CORS to our application
-CORS(app, resources={r"/api/*": {"origins": "http://0.0.0.0"}})
+CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
 # Route Registration for the application
 app.register_blueprint(app_views)
 app.register_blueprint(state_views)

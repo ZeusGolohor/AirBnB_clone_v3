@@ -6,8 +6,13 @@ from flask import jsonify, abort, request
 from api.v1.views import user_views
 from models import storage
 from models.user import User
+import models
 
-@user_views.route("/users/<user_id>", methods=["GET", "DELETE", "PUT"], strict_slashes=False)
+
+@user_views.route(
+        "/users/<user_id>",
+        methods=["GET", "DELETE", "PUT"],
+        strict_slashes=False)
 @user_views.route("/users", methods=["GET", "POST"], strict_slashes=False)
 def all_states(user_id=None):
     """
@@ -55,7 +60,13 @@ def all_states(user_id=None):
         try:
             data = request.get_json()
             try:
-                data["name"]
+                data["email"]
+                data["password"]
+                data["first_name"]
+                data["last_name"]
+                if models.storage_t != 'db':
+                    data["places"]
+                    data["reviews"]
                 ins = cls(**data)
                 ins.save()
                 return (ins.to_dict(), 201)
@@ -81,4 +92,3 @@ def all_states(user_id=None):
                         return jsonify({"message": "Not a JSON"}), 400
 
         return (abort(404))
-          
