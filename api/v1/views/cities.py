@@ -8,10 +8,15 @@ from models import storage
 from models.city import City
 from models.state import State
 
-# @state_views.route("/cities/<city_id>", methods=["GET", "DELETE", "PUT"], strict_slashes=False)
-# @state_views.route("/cities", methods=["GET", "POST"], strict_slashes=False)
-@city_views.route("/cities/<city_id>", strict_slashes=False, methods=["GET", "DELETE", "PUT"])
-@city_views.route("/states/<state_id>/cities", methods=["GET", "POST"], strict_slashes=False)
+
+@city_views.route(
+        "/cities/<city_id>",
+        strict_slashes=False,
+        methods=["GET", "DELETE", "PUT"])
+@city_views.route(
+    "/states/<state_id>/cities",
+    methods=["GET", "POST"],
+    strict_slashes=False)
 def all_cites(city_id=None, state_id=None):
     """
     A method to retrieve all states.
@@ -68,7 +73,7 @@ def all_cites(city_id=None, state_id=None):
                 for key, value in all_state.items():
                     if (value.id == state_id):
                         state = value
-                if (state == None):
+                if (state is None):
                     return (abort(404))
                 data["state_id"] = state.id
                 ins = cls(**data)
@@ -99,4 +104,3 @@ def all_cites(city_id=None, state_id=None):
                         return jsonify({"message": "Not a JSON"}), 400
 
         return (abort(404))
-          

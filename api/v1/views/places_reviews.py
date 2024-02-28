@@ -8,10 +8,15 @@ from models import storage
 from models.place import Place
 from models.review import Review
 
-# @state_views.route("/cities/<city_id>", methods=["GET", "DELETE", "PUT"], strict_slashes=False)
-# @state_views.route("/cities", methods=["GET", "POST"], strict_slashes=False)
-@review_views.route("/reviews/<review_id>", strict_slashes=False, methods=["GET", "DELETE", "PUT"])
-@review_views.route("/places/<place_id>/reviews", methods=["GET", "POST"], strict_slashes=False)
+
+@review_views.route(
+        "/reviews/<review_id>",
+        strict_slashes=False,
+        methods=["GET", "DELETE", "PUT"])
+@review_views.route(
+    "/places/<place_id>/reviews",
+    methods=["GET", "POST"],
+    strict_slashes=False)
 def all_cites(review_id=None, place_id=None):
     """
     A method to retrieve all states.
@@ -70,7 +75,7 @@ def all_cites(review_id=None, place_id=None):
                 for key, value in all_places.items():
                     if (value.id == place_id):
                         place = value
-                if (place == None):
+                if (place is None):
                     return (abort(404))
                 data["place_id"] = place.id
                 ins = cls(**data)
@@ -101,4 +106,3 @@ def all_cites(review_id=None, place_id=None):
                         return jsonify({"message": "Not a JSON"}), 400
 
         return (abort(404))
-          

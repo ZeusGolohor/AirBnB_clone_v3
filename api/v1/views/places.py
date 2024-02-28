@@ -8,10 +8,15 @@ from models import storage
 from models.city import City
 from models.place import Place
 
-# @state_views.route("/cities/<city_id>", methods=["GET", "DELETE", "PUT"], strict_slashes=False)
-# @state_views.route("/cities", methods=["GET", "POST"], strict_slashes=False)
-@place_views.route("/places/<place_id>", strict_slashes=False, methods=["GET", "DELETE", "PUT"])
-@place_views.route("/cities/<city_id>/places", methods=["GET", "POST"], strict_slashes=False)
+
+@place_views.route(
+        "/places/<place_id>",
+        strict_slashes=False,
+        methods=["GET", "DELETE", "PUT"])
+@place_views.route(
+    "/cities/<city_id>/places",
+    methods=["GET", "POST"],
+    strict_slashes=False)
 def all_cites(city_id=None, place_id=None):
     """
     A method to retrieve all states.
@@ -77,7 +82,7 @@ def all_cites(city_id=None, place_id=None):
                 for key, value in all_cities.items():
                     if (value.id == city_id):
                         city = value
-                if (city == None):
+                if (city is None):
                     return (abort(404))
                 data["city_id"] = city.id
                 ins = cls(**data)
@@ -91,7 +96,17 @@ def all_cites(city_id=None, place_id=None):
             return (jsonify({"message": "Not a JSON"}), 400)
     elif (request.method == "PUT"):
         if (id is not None):
-            awd_keys = ["city_id", "user_id", "name", "description", "number_rooms", "number_bathrooms", "max_guest", "price_by_night", "latitude", "longitude"]
+            awd_keys = [
+                "city_id",
+                "user_id",
+                "name",
+                "description",
+                "number_rooms",
+                "number_bathrooms",
+                "max_guest",
+                "price_by_night",
+                "latitude",
+                "longitude"]
             res = storage.all(cls)
             for key, value in res.items():
                 if (value.id == place_id):
@@ -108,4 +123,3 @@ def all_cites(city_id=None, place_id=None):
                         return jsonify({"message": "Not a JSON"}), 400
 
         return (abort(404))
-          

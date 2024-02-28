@@ -7,8 +7,15 @@ from api.v1.views import state_views
 from models import storage
 from models.state import State
 
-@state_views.route("/states/<id>", methods=["GET", "DELETE", "PUT"], strict_slashes=False)
-@state_views.route("/states", methods=["GET", "POST"], strict_slashes=False)
+
+@state_views.route(
+        "/states/<id>",
+        methods=["GET", "DELETE", "PUT"],
+        strict_slashes=False)
+@state_views.route(
+    "/states",
+    methods=["GET", "POST"],
+    strict_slashes=False)
 def all_states(id=None):
     """
     A method to retrieve all states.
@@ -80,4 +87,3 @@ def all_states(id=None):
                         return jsonify({"message": "Not a JSON"}), 400
 
         return (abort(404))
-          

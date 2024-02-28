@@ -7,8 +7,15 @@ from api.v1.views import amenity_views
 from models import storage
 from models.amenity import Amenity
 
-@amenity_views.route("/amenities/<amenity_id>", methods=["GET", "DELETE", "PUT"], strict_slashes=False)
-@amenity_views.route("/amenities", methods=["GET", "POST"], strict_slashes=False)
+
+@amenity_views.route(
+        "/amenities/<amenity_id>",
+        methods=["GET", "DELETE", "PUT"],
+        strict_slashes=False)
+@amenity_views.route(
+    "/amenities",
+    methods=["GET", "POST"],
+    strict_slashes=False)
 def all_states(amenity_id=None):
     """
     A method to retrieve all states.
@@ -81,4 +88,3 @@ def all_states(amenity_id=None):
                         return jsonify({"message": "Not a JSON"}), 400
 
         return (abort(404))
-          
