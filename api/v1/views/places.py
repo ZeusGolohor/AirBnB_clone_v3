@@ -46,14 +46,14 @@ def all_cites(city_id=None, place_id=None):
     # to delete an instance
     elif (request.method == "DELETE"):
         # check if the id exists
-        if (city_id is not None):
+        if (place_id is not None):
             res = storage.all(cls)
             for key, value in res.items():
                 if (value.id == place_id):
                     value.delete()
                     storage.save()
                     return (jsonify({}), 200)
-            return (abort(404))
+        return (abort(404))
     # check if the request is a post request
     # to create new instance(s)
     elif (request.method == "POST"):
